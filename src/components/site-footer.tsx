@@ -96,12 +96,14 @@ export function SiteFooter() {
 
           {/* Copyright */}
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Anuraag Medicals. All rights reserved.
+            © 
+            {new Date().getFullYear()} Anuraag Medicals. All rights reserved.
           </p>
         </div>
       </div>
     </footer>
   );
+  
 }
 
 

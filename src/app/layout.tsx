@@ -4,6 +4,7 @@ import { Toaster } from "sonner";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { CartProvider } from "@/context/cart-context";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -71,10 +72,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${playfair.variable} antialiased min-h-dvh flex flex-col`}>
-        <SiteHeader />
-        <main className="flex-1">{children}</main>
-        <SiteFooter />
-        <Toaster richColors position="top-right" />
+        <CartProvider>
+          <SiteHeader />
+          <main className="flex-1">{children}</main>
+          <SiteFooter />
+          <Toaster richColors position="top-right" />
+        </CartProvider>
       </body>
     </html>
   );
