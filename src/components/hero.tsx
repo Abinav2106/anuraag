@@ -49,16 +49,95 @@ export function Hero() {
         />
       </div>
 
-      {/* Hero background image with subtle parallax */}
+      {/* Hero background with product showcase */}
       <motion.div style={{ y: translateY }} className="absolute inset-0 z-0 will-change-transform">
+        {/* Background base */}
         <Image
           src="/assets/static/hero.png"
           alt="Premium first aid kit in medical workspace"
           fill
-          className="object-cover"
+          className="object-cover opacity-30"
           priority
           unoptimized
         />
+        
+        {/* Floating product images */}
+        <div className="absolute inset-0 overflow-hidden">
+          <motion.div
+            initial={{ opacity: 0, x: -100, rotate: -10 }}
+            animate={{ opacity: 0.6, x: 0, rotate: 0 }}
+            transition={{ duration: 1.2, delay: 0.5 }}
+            className="absolute top-20 left-10 w-32 h-32 rounded-lg overflow-hidden shadow-lg"
+          >
+            <Image
+              src="/assets/static/Scissors.png"
+              alt="Medical Scissors"
+              fill
+              className="object-cover"
+              unoptimized
+            />
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, x: 100, rotate: 10 }}
+            animate={{ opacity: 0.6, x: 0, rotate: 0 }}
+            transition={{ duration: 1.2, delay: 0.7 }}
+            className="absolute top-32 right-16 w-28 h-28 rounded-lg overflow-hidden shadow-lg"
+          >
+            <Image
+              src="/assets/static/Sterilegauze.png"
+              alt="Sterile Gauze"
+              fill
+              className="object-cover"
+              unoptimized
+            />
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 100, rotate: -5 }}
+            animate={{ opacity: 0.6, y: 0, rotate: 0 }}
+            transition={{ duration: 1.2, delay: 0.9 }}
+            className="absolute bottom-40 left-20 w-36 h-36 rounded-lg overflow-hidden shadow-lg"
+          >
+            <Image
+              src="/assets/static/Vinylgloves.png"
+              alt="Vinyl Gloves"
+              fill
+              className="object-cover"
+              unoptimized
+            />
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: -100, rotate: 8 }}
+            animate={{ opacity: 0.6, y: 0, rotate: 0 }}
+            transition={{ duration: 1.2, delay: 1.1 }}
+            className="absolute bottom-32 right-12 w-30 h-30 rounded-lg overflow-hidden shadow-lg"
+          >
+            <Image
+              src="/assets/static/Antisepticwipes.png"
+              alt="Antiseptic Wipes"
+              fill
+              className="object-cover"
+              unoptimized
+            />
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5, rotate: -15 }}
+            animate={{ opacity: 0.5, scale: 1, rotate: 0 }}
+            transition={{ duration: 1.2, delay: 1.3 }}
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-lg overflow-hidden shadow-lg"
+          >
+            <Image
+              src="/assets/static/Tweezers.png"
+              alt="Medical Tweezers"
+              fill
+              className="object-cover"
+              unoptimized
+            />
+          </motion.div>
+        </div>
       </motion.div>
 
       {/* Content */}

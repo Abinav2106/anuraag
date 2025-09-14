@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { X, Plus, Minus, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 interface ProductDetailProps {
   isOpen: boolean;
@@ -12,6 +13,7 @@ interface ProductDetailProps {
     name: string;
     description: string;
     price: number;
+    image: string;
   };
 }
 
@@ -83,11 +85,15 @@ export function ProductDetail({ isOpen, onClose, product }: ProductDetailProps) 
             <div className="space-y-4">
               {/* Main Image */}
               <div className="aspect-square bg-stone-100 rounded-lg relative overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-48 h-48 bg-stone-200 rounded-lg flex items-center justify-center">
-                    <span className="text-6xl text-stone-400">📦</span>
-                  </div>
-                </div>
+                {product.image && (
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                )}
                 {/* Heart Icon */}
                 <button className="absolute top-4 right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
                   <span className="text-stone-400 hover:text-red-400 transition-colors text-lg">♡</span>

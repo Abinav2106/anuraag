@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import Image from "next/image";
 
 // Kit data structure
 interface KitItem {
@@ -24,7 +25,7 @@ const kits: Kit[] = [
     id: "mini",
     title: "Mini Kit",
     size: "Mini",
-    image: "/assets/static/kit-mini.png",
+    image: "/assets/static/Antisepticwipes.png",
     contents: [
       { name: "Adhesive Bandages", quantity: 10 },
       { name: "Antiseptic Wipes", quantity: 5 },
@@ -36,7 +37,7 @@ const kits: Kit[] = [
     id: "small",
     title: "Small Kit",
     size: "Small",
-    image: "/assets/static/kit-small.png",
+    image: "/assets/static/Sterilegauze.png",
     contents: [
       { name: "Adhesive Bandages", quantity: 20 },
       { name: "Antiseptic Wipes", quantity: 10 },
@@ -50,7 +51,7 @@ const kits: Kit[] = [
     id: "medium",
     title: "Medium Kit",
     size: "Medium",
-    image: "/assets/static/kit-medium.png",
+    image: "/assets/static/Vinylgloves.png",
     contents: [
       { name: "Adhesive Bandages", quantity: 40 },
       { name: "Antiseptic Wipes", quantity: 20 },
@@ -66,7 +67,7 @@ const kits: Kit[] = [
     id: "large",
     title: "Large Kit",
     size: "Large",
-    image: "/assets/static/kit-large.png",
+    image: "/assets/static/Scissors.png",
     contents: [
       { name: "Adhesive Bandages", quantity: 60 },
       { name: "Antiseptic Wipes", quantity: 30 },
@@ -109,12 +110,14 @@ export function ProductKitCarousel() {
             transition={{ duration: 0.35, ease: "easeOut" }}
             className="flex flex-col items-center"
           >
-            <div className="relative w-80 h-80 md:w-96 md:h-96 mb-6 bg-secondary/20 rounded-lg flex items-center justify-center">
-              <div className="text-center text-muted-foreground">
-                <div className="text-4xl mb-2">📦</div>
-                <p>Kit Image Placeholder</p>
-                <p className="text-sm">Replace with actual {selectedKit.title} image</p>
-              </div>
+            <div className="relative w-80 h-80 md:w-96 md:h-96 mb-6 bg-secondary/20 rounded-lg overflow-hidden shadow-lg">
+              <Image
+                src={selectedKit.image}
+                alt={`${selectedKit.title} - Premium first aid kit`}
+                fill
+                className="object-cover hover:scale-105 transition-transform duration-500"
+                sizes="(max-width: 768px) 320px, 384px"
+              />
             </div>
             <h3 className="text-2xl font-serif font-bold text-foreground mb-2">
               {selectedKit.title}
@@ -142,8 +145,14 @@ export function ProductKitCarousel() {
                 onClick={() => setSelectedKit(kit)}
               >
                 <CardContent className="p-4 text-center">
-                  <div className="relative w-20 h-20 mx-auto mb-3 bg-secondary/20 rounded flex items-center justify-center">
-                    <span className="text-2xl">📦</span>
+                  <div className="relative w-20 h-20 mx-auto mb-3 bg-secondary/20 rounded overflow-hidden">
+                    <Image
+                      src={kit.image}
+                      alt={`${kit.title} thumbnail`}
+                      fill
+                      className="object-cover"
+                      sizes="80px"
+                    />
                   </div>
                   <h4 className="font-medium text-foreground mb-2">{kit.title}</h4>
                   <Button

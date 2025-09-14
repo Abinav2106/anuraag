@@ -6,6 +6,7 @@ import { Heart, ShoppingCart } from "lucide-react";
 import { ProductDetail } from "@/components/product-detail";
 import { useCart } from "@/context/cart-context";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 const categories = [
   { id: "all", label: "All Products", active: true },
@@ -16,23 +17,23 @@ const categories = [
 
 const products = {
   kits: [
-    { name: "Plastic First Aid Box", description: "Durable plastic construction for basic first aid needs", price: 299 },
-    { name: "Vinyl First Aid Kit", description: "Portable vinyl case with essential medical supplies", price: 399 },
-    { name: "Transparent First Aid Box", description: "Clear visibility for quick item identification", price: 349 },
-    { name: "Family First Aid Kit", description: "Comprehensive kit for household emergency care", price: 599 },
+    { name: "Plastic First Aid Box", description: "Durable plastic construction for basic first aid needs", price: 299, image: "/assets/static/hero.png" },
+    { name: "Vinyl First Aid Kit", description: "Portable vinyl case with essential medical supplies", price: 399, image: "/assets/static/Vinylgloves.png" },
+    { name: "Transparent First Aid Box", description: "Clear visibility for quick item identification", price: 349, image: "/assets/static/hero.png" },
+    { name: "Family First Aid Kit", description: "Comprehensive kit for household emergency care", price: 599, image: "/assets/static/hero.png" },
   ],
   consumables: [
-    { name: "Sterile Gauze", description: "Medical-grade sterile gauze pads and rolls", price: 149 },
-    { name: "Adhesive Bandages", description: "Various sizes of adhesive bandages", price: 89 },
-    { name: "Antiseptic Wipes", description: "Alcohol-based antiseptic cleaning wipes", price: 129 },
-    { name: "Disposable Gloves", description: "Latex-free disposable examination gloves", price: 199 },
-    { name: "Adhesive Tape", description: "Medical adhesive tape for securing bandages", price: 79 },
-    { name: "Triangular Bandages", description: "Multi-purpose triangular bandages for slings", price: 159 },
+    { name: "Sterile Gauze", description: "Medical-grade sterile gauze pads and rolls", price: 149, image: "/assets/static/Sterilegauze.png" },
+    { name: "Adhesive Bandages", description: "Various sizes of adhesive bandages", price: 89, image: "/assets/static/hero.png" },
+    { name: "Antiseptic Wipes", description: "Alcohol-based antiseptic cleaning wipes", price: 129, image: "/assets/static/Antisepticwipes.png" },
+    { name: "Disposable Gloves", description: "Latex-free disposable examination gloves", price: 199, image: "/assets/static/Vinylgloves.png" },
+    { name: "Adhesive Tape", description: "Medical adhesive tape for securing bandages", price: 79, image: "/assets/static/hero.png" },
+    { name: "Triangular Bandages", description: "Multi-purpose triangular bandages for slings", price: 159, image: "/assets/static/hero.png" },
   ],
   specialty: [
-    { name: "Scissors and Tweezers", description: "Precision medical instruments", price: 249 },
-    { name: "Antibiotic Ointment", description: "Topical antibiotic for wound care", price: 189 },
-    { name: "Pain Relievers", description: "Over-the-counter pain medication", price: 99 },
+    { name: "Scissors and Tweezers", description: "Precision medical instruments", price: 249, image: "/assets/static/Scissors.png" },
+    { name: "Antibiotic Ointment", description: "Topical antibiotic for wound care", price: 189, image: "/assets/static/hero.png" },
+    { name: "Pain Relievers", description: "Over-the-counter pain medication", price: 99, image: "/assets/static/hero.png" },
   ],
 };
 
@@ -43,6 +44,7 @@ export function ProductCategories() {
     name: string;
     description: string;
     price: number;
+    image: string;
   }>(null);
   const { addItem } = useCart();
 
@@ -105,17 +107,20 @@ export function ProductCategories() {
                 onClick={() => setSelectedProduct({
                   name: product.name,
                   description: product.description,
-                  price: product.price
+                  price: product.price,
+                  image: product.image
                 })}
               >
                 <div className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
                   {/* Product Image Area */}
                   <div className="aspect-square bg-stone-100 relative overflow-hidden">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-32 h-32 bg-stone-200 rounded-lg flex items-center justify-center">
-                        <span className="text-4xl text-stone-400">📦</span>
-                      </div>
-                    </div>
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="object-cover hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
                     {/* Heart Icon */}
                     <button className="absolute top-4 right-4 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
                       <span className="text-stone-400 hover:text-red-400 transition-colors">♡</span>
@@ -142,7 +147,8 @@ export function ProductCategories() {
                           setSelectedProduct({
                             name: product.name,
                             description: product.description,
-                            price: product.price
+                            price: product.price,
+                            image: product.image
                           });
                         }}
                         className="text-sm text-stone-600 hover:text-stone-800 border border-stone-300 hover:border-stone-400 px-3 py-1.5 rounded-md transition-all"
@@ -200,7 +206,7 @@ export function ProductCategories() {
         <ProductDetail
           isOpen={!!selectedProduct}
           onClose={() => setSelectedProduct(null)}
-          product={selectedProduct || { name: "", description: "", price: 0 }}
+          product={selectedProduct || { name: "", description: "", price: 0, image: "" }}
         />
       </div>
     </section>
