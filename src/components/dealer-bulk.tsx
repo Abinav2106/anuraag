@@ -84,15 +84,6 @@ export function DealerBulk() {
           ))}
         </div>
 
-        {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button size="lg" className="px-8">
-            Become a Dealer
-          </Button>
-          <Button size="lg" variant="outline" className="px-8 border-primary">
-            Request Bulk Quote
-          </Button>
-        </div>
       </div>
     </section>
   );

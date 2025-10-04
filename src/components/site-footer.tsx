@@ -3,7 +3,7 @@ import { MapPin, Phone, Mail, Award, Shield, CheckCircle } from "lucide-react";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t bg-secondary/20">
+    <footer id="contact-section" className="border-t bg-secondary/20">
       <div className="container mx-auto px-6 py-12">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
@@ -36,7 +36,6 @@ export function SiteFooter() {
               {[
                 { title: "Home", href: "/" },
                 { title: "Products", href: "/products" },
-                { title: "Dealers", href: "/dealers" },
                 { title: "Contact", href: "/contact" },
               ].map((link) => (
                 <Link
@@ -56,8 +55,8 @@ export function SiteFooter() {
             <div className="space-y-3 text-sm text-muted-foreground">
               <div className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-primary" />
-                <a href="tel:+919876543210" className="hover:text-primary transition-colors">
-                  +91 98765 43210
+                <a href="tel:+918047764026" className="hover:text-primary transition-colors">
+                  +91 80477 64026
                 </a>
               </div>
               <div className="flex items-center gap-3">

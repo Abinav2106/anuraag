@@ -5,6 +5,9 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface Market {
   id: string;
@@ -14,6 +17,7 @@ interface Market {
   description: string;
   backgroundImage: string;
   cta: string;
+  recommendedProducts: string[];
 }
 
 const markets: Market[] = [
@@ -24,7 +28,8 @@ const markets: Market[] = [
     percentage: "40%",
     description: "Trusted by over 1000+ healthcare institutions for critical emergency preparedness and patient safety.",
     backgroundImage: "/assets/static/healthcare-bg.jpg",
-    cta: "See Recommended Kits"
+    cta: "See Recommended Kits",
+    recommendedProducts: ["Sterile Gauze", "Antiseptic Wipes", "Plastic First Aid Box"]
   },
   {
     id: "education",
@@ -33,7 +38,8 @@ const markets: Market[] = [
     percentage: "25%",
     description: "Comprehensive safety solutions for educational environments, sports facilities, and student activities.",
     backgroundImage: "/assets/static/education-bg.jpg",
-    cta: "See Recommended Kits"
+    cta: "See Recommended Kits",
+    recommendedProducts: ["Family First Aid Kit", "Adhesive Bandages", "Disposable Gloves"]
   },
   {
     id: "corporate",
@@ -42,7 +48,8 @@ const markets: Market[] = [
     percentage: "20%",
     description: "Industrial-grade first aid solutions for workplace safety compliance and employee protection.",
     backgroundImage: "/assets/static/corporate-bg.jpg", 
-    cta: "See Recommended Kits"
+    cta: "See Recommended Kits",
+    recommendedProducts: ["Transparent First Aid Box", "Pain Relievers", "Antibiotic Ointment"]
   }
 ];
 
@@ -70,6 +77,11 @@ const cardVariants = {
 export function IndustryMarkets() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const router = useRouter();
+
+  const handleSectorClick = (sectorId: string) => {
+    router.push(`/products?sector=${sectorId}`);
+  };
 
   return (
     <section ref={ref} className="py-16 bg-background">
@@ -106,17 +118,17 @@ export function IndustryMarkets() {
             >
               <Card className="group overflow-hidden h-full cursor-pointer transition-all duration-300 hover:shadow-xl">
                 <div className="relative h-64 overflow-hidden">
-                  {/* Background Image Placeholder */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-secondary via-secondary/80 to-primary/20">
-                    <div className="absolute inset-0 flex items-center justify-center text-6xl opacity-20">
-                      {market.id === 'healthcare' && '🏥'}
-                      {market.id === 'education' && '🎓'}
-                      {market.id === 'corporate' && '🏢'}
-                    </div>
-                  </div>
+                  {/* Background Image */}
+                  <Image
+                    src={market.backgroundImage}
+                    alt={`${market.title} background`}
+                    fill
+                    className="object-cover"
+                    priority={false}
+                  />
                   
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent" />
+                  {/* Dark overlay for better text readability */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
                   
                   {/* Content Overlay */}
                   <div className="absolute inset-0 p-6 flex flex-col justify-end text-white">
@@ -140,8 +152,21 @@ export function IndustryMarkets() {
                     {market.description}
                   </p>
                   <Button 
-                    variant="outline" 
-                    className="w-full group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all duration-200"
+                    onClick={() => handleSectorClick(market.id)}
+                    className="w-full transition-all duration-200 focus:ring-0 focus:outline-none active:scale-95"
+                    style={{
+                      backgroundColor: '#C89B3C',
+                      color: '#000000',
+                      border: '1px solid #C89B3C'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = '#B8872F';
+                      e.currentTarget.style.color = '#000000';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = '#C89B3C';
+                      e.currentTarget.style.color = '#000000';
+                    }}
                   >
                     {market.cta}
                   </Button>

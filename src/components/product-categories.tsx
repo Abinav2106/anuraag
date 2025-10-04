@@ -7,46 +7,22 @@ import { ProductDetail } from "@/components/product-detail";
 import { useCart } from "@/context/cart-context";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-
-const categories = [
-  { id: "all", label: "All Products", active: true },
-  { id: "kits", label: "First Aid Kits", active: false },
-  { id: "consumables", label: "Consumables", active: false },
-  { id: "specialty", label: "Specialty Items", active: false },
-];
-
-const products = {
-  kits: [
-    { name: "Plastic First Aid Box", description: "Durable plastic construction for basic first aid needs", price: 299, image: "/assets/static/hero.png" },
-    { name: "Vinyl First Aid Kit", description: "Portable vinyl case with essential medical supplies", price: 399, image: "/assets/static/Vinylgloves.png" },
-    { name: "Transparent First Aid Box", description: "Clear visibility for quick item identification", price: 349, image: "/assets/static/hero.png" },
-    { name: "Family First Aid Kit", description: "Comprehensive kit for household emergency care", price: 599, image: "/assets/static/hero.png" },
-  ],
-  consumables: [
-    { name: "Sterile Gauze", description: "Medical-grade sterile gauze pads and rolls", price: 149, image: "/assets/static/Sterilegauze.png" },
-    { name: "Adhesive Bandages", description: "Various sizes of adhesive bandages", price: 89, image: "/assets/static/hero.png" },
-    { name: "Antiseptic Wipes", description: "Alcohol-based antiseptic cleaning wipes", price: 129, image: "/assets/static/Antisepticwipes.png" },
-    { name: "Disposable Gloves", description: "Latex-free disposable examination gloves", price: 199, image: "/assets/static/Vinylgloves.png" },
-    { name: "Adhesive Tape", description: "Medical adhesive tape for securing bandages", price: 79, image: "/assets/static/hero.png" },
-    { name: "Triangular Bandages", description: "Multi-purpose triangular bandages for slings", price: 159, image: "/assets/static/hero.png" },
-  ],
-  specialty: [
-    { name: "Scissors and Tweezers", description: "Precision medical instruments", price: 249, image: "/assets/static/Scissors.png" },
-    { name: "Antibiotic Ointment", description: "Topical antibiotic for wound care", price: 189, image: "/assets/static/hero.png" },
-    { name: "Pain Relievers", description: "Over-the-counter pain medication", price: 99, image: "/assets/static/hero.png" },
-  ],
-};
+import { categories, getProductsByCategory, type Product } from "@/data/products";
 
 export function ProductCategories() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [showAll, setShowAll] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<null | {
-    name: string;
-    description: string;
-    price: number;
-    image: string;
-  }>(null);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [selectedSizes, setSelectedSizes] = useState<{ [key: string]: string }>({});
   const { addItem } = useCart();
+
+  const getSelectedSize = (productName: string, sizes: string[]) => {
+    return selectedSizes[productName] || sizes[0];
+  };
+
+  const setSelectedSize = (productName: string, size: string) => {
+    setSelectedSizes(prev => ({ ...prev, [productName]: size }));
+  };
 
   return (
     <section className="py-20 bg-stone-50">
@@ -94,22 +70,14 @@ export function ProductCategories() {
           transition={{ duration: 0.3 }}
         >
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {(activeCategory === "all" 
-              ? [...products.kits, ...products.consumables, ...products.specialty]
-              : products[activeCategory as keyof typeof products] || []
-            ).slice(0, showAll ? undefined : 6).map((product, index) => (
+            {getProductsByCategory(activeCategory).slice(0, showAll ? undefined : 6).map((product, index) => (
               <motion.div
                 key={product.name}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
                 className="group cursor-pointer"
-                onClick={() => setSelectedProduct({
-                  name: product.name,
-                  description: product.description,
-                  price: product.price,
-                  image: product.image
-                })}
+                onClick={() => setSelectedProduct(product)}
               >
                 <div className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
                   {/* Product Image Area */}
@@ -121,10 +89,6 @@ export function ProductCategories() {
                       className="object-cover hover:scale-105 transition-transform duration-300"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
-                    {/* Heart Icon */}
-                    <button className="absolute top-4 right-4 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
-                      <span className="text-stone-400 hover:text-red-400 transition-colors">♡</span>
-                    </button>
                   </div>
                   
                   {/* Product Info */}
@@ -135,6 +99,32 @@ export function ProductCategories() {
                     <p className="text-stone-600 text-sm mb-4 leading-relaxed">
                       {product.description}
                     </p>
+                    
+                    {/* Size Selection */}
+                    <div className="mb-4">
+                      <label className="text-xs font-medium text-stone-600 mb-2 block">
+                        Size:
+                      </label>
+                      <div className="flex flex-wrap gap-2">
+                        {product.sizes.map((size) => (
+                          <button
+                            key={size}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setSelectedSize(product.name, size);
+                            }}
+                            className={`px-3 py-1 text-xs font-medium rounded-md border transition-all ${
+                              getSelectedSize(product.name, product.sizes) === size
+                                ? 'border-stone-700 bg-stone-700 text-white'
+                                : 'border-stone-300 bg-white text-stone-600 hover:border-stone-400'
+                            }`}
+                          >
+                            {size}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
                     <div className="flex items-center justify-between mb-3">
                       <span className="text-lg font-medium text-stone-800">
                         ₹{product.price}
@@ -144,12 +134,7 @@ export function ProductCategories() {
                         whileTap={{ scale: 0.95 }}
                         onClick={(e) => {
                           e.stopPropagation();
-                          setSelectedProduct({
-                            name: product.name,
-                            description: product.description,
-                            price: product.price,
-                            image: product.image
-                          });
+                          setSelectedProduct(product);
                         }}
                         className="text-sm text-stone-600 hover:text-stone-800 border border-stone-300 hover:border-stone-400 px-3 py-1.5 rounded-md transition-all"
                       >
@@ -162,11 +147,12 @@ export function ProductCategories() {
                       onClick={(e) => {
                         e.stopPropagation();
                         addItem({
-                          id: `${activeCategory}-${product.name}`,
                           name: product.name,
                           description: product.description,
                           price: product.price,
-                          category: activeCategory === "all" ? "kits" : activeCategory
+                          category: product.category,
+                          size: getSelectedSize(product.name, product.sizes),
+                          image: product.image
                         });
                       }}
                       className="w-full bg-primary text-white hover:bg-primary/90 transition-colors"
@@ -183,9 +169,7 @@ export function ProductCategories() {
 
           {/* Show More / Show Less Button */}
           {(() => {
-            const totalProducts = activeCategory === "all" 
-              ? [...products.kits, ...products.consumables, ...products.specialty].length
-              : (products[activeCategory as keyof typeof products] || []).length;
+            const totalProducts = getProductsByCategory(activeCategory).length;
             
             return totalProducts > 6 && (
               <div className="text-center mt-12">
@@ -206,7 +190,7 @@ export function ProductCategories() {
         <ProductDetail
           isOpen={!!selectedProduct}
           onClose={() => setSelectedProduct(null)}
-          product={selectedProduct || { name: "", description: "", price: 0, image: "" }}
+          product={selectedProduct || { name: "", description: "", price: 0, image: "", category: "", sizes: [] }}
         />
       </div>
     </section>

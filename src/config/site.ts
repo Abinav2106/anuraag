@@ -8,11 +8,9 @@ export const siteConfig = {
   nav: [
     { title: "Home", href: "/" },
     { title: "Products", href: "/products" },
-    { title: "Markets", href: "/markets" },
-    { title: "Quality", href: "/quality" },
+    { title: "Testimonials", href: "/testimonials" },
     { title: "About", href: "/about" },
-    { title: "Dealers", href: "/dealers" },
-    { title: "Get Quote", href: "/quote" },
+    { title: "Contact Us", href: "/contact" },
   ] as NavItem[],
   footer: {
     links: [

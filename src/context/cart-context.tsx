@@ -9,6 +9,8 @@ export interface CartItem {
   price: number;
   quantity: number;
   category: string;
+  size: string;
+  image: string;
 }
 
 interface CartState {
@@ -32,17 +34,19 @@ const initialState: CartState = {
 function cartReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
     case "ADD_ITEM": {
-      const existingItem = state.items.find(item => item.id === action.payload.id);
+      // Create unique ID based on product name, category, and size
+      const uniqueId = `${action.payload.category}-${action.payload.name}-${action.payload.size}`;
+      const existingItem = state.items.find(item => item.id === uniqueId);
       
       let newItems: CartItem[];
       if (existingItem) {
         newItems = state.items.map(item =>
-          item.id === action.payload.id
+          item.id === uniqueId
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       } else {
-        newItems = [...state.items, { ...action.payload, quantity: 1 }];
+        newItems = [...state.items, { ...action.payload, id: uniqueId, quantity: 1 }];
       }
 
       const total = newItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);

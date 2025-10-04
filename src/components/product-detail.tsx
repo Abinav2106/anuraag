@@ -14,10 +14,10 @@ interface ProductDetailProps {
     description: string;
     price: number;
     image: string;
+    sizes: string[];
   };
 }
 
-const sizes = ["50ml", "100ml", "150ml"];
 const features = [
   { icon: "🌿", label: "100% Natural" },
   { icon: "🐰", label: "Cruelty Free" },
@@ -41,7 +41,7 @@ const accordionSections = [
 ];
 
 export function ProductDetail({ isOpen, onClose, product }: ProductDetailProps) {
-  const [selectedSize, setSelectedSize] = useState("100ml");
+  const [selectedSize, setSelectedSize] = useState(product.sizes[0] || "");
   const [quantity, setQuantity] = useState(1);
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
 
@@ -123,15 +123,15 @@ export function ProductDetail({ isOpen, onClose, product }: ProductDetailProps) 
               {/* Size Selection */}
               <div>
                 <h3 className="text-sm font-medium text-stone-800 mb-3">Size</h3>
-                <div className="flex gap-2">
-                  {sizes.map((size) => (
+                <div className="flex flex-wrap gap-2">
+                  {product.sizes.map((size) => (
                     <button
                       key={size}
                       onClick={() => setSelectedSize(size)}
-                      className={`px-4 py-2 text-sm rounded-lg border transition-colors ${
+                      className={`px-4 py-2 text-sm rounded-full border border-gold text-black hover:bg-gold hover:text-white transition-colors ${
                         selectedSize === size
-                          ? "border-stone-800 bg-stone-800 text-white"
-                          : "border-stone-300 text-stone-600 hover:border-stone-400"
+                          ? "bg-gold text-white"
+                          : "hover:bg-gold hover:text-white"
                       }`}
                     >
                       {size}
