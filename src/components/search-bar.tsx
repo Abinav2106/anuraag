@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 export function SearchBar() {
   const [searchQuery, setSearchQuery] = useState("");
 
-  const handleSearch = (e) => {
+  const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
       // Navigate to products page with search query

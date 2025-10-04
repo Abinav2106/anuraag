@@ -13,7 +13,7 @@ export default function ContactPage() {
   const LNG = 80.19031602269474;
 
   // More specific address format for better Google Maps recognition
-  const address = "Plot No.13 - A, 13th Street, Karthikeyapuram, Chennai - 600091, Tamil Nadu, India";
+  // const address = "Plot No.13 - A, 13th Street, Karthikeyapuram, Chennai - 600091, Tamil Nadu, India";
 
   // Use coordinates for both embedded map and clickable link to ensure exact location
   const gmapViewUrl = `https://www.google.com/maps/search/?api=1&query=${LAT},${LNG}`;

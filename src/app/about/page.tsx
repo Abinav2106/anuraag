@@ -59,7 +59,7 @@ export default function AboutPage() {
               className="text-gray-700 leading-relaxed text-lg md:text-xl"
               variants={fadeInUp}
             >
-              As Chennai's foremost supplier, our reputation is built on transparency, integrity, and an unwavering focus on client needs. We pride ourselves on long-standing partnerships with hospitals, clinics, schools, and corporations throughout India, supporting both retail and wholesale requirements with tailor-made supply solutions.
+              As Chennai&apos;s foremost supplier, our reputation is built on transparency, integrity, and an unwavering focus on client needs. We pride ourselves on long-standing partnerships with hospitals, clinics, schools, and corporations throughout India, supporting both retail and wholesale requirements with tailor-made supply solutions.
             </motion.p>
             
             <motion.p 

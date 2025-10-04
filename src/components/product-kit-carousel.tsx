@@ -25,7 +25,7 @@ const kits: Kit[] = [
     id: "mini",
     title: "Mini Kit",
     size: "Mini",
-    image: "/assets/static/Antisepticwipes.png",
+    image: "/assets/static/AntisepticWipes.jpg",
     contents: [
       { name: "Adhesive Bandages", quantity: 10 },
       { name: "Antiseptic Wipes", quantity: 5 },
@@ -37,7 +37,7 @@ const kits: Kit[] = [
     id: "small",
     title: "Small Kit",
     size: "Small",
-    image: "/assets/static/Sterilegauze.png",
+    image: "/assets/static/SterileGauze.jpg",
     contents: [
       { name: "Adhesive Bandages", quantity: 20 },
       { name: "Antiseptic Wipes", quantity: 10 },
@@ -51,7 +51,7 @@ const kits: Kit[] = [
     id: "medium",
     title: "Medium Kit",
     size: "Medium",
-    image: "/assets/static/Vinylgloves.png",
+    image: "/assets/static/DisposableGloves.jpg",
     contents: [
       { name: "Adhesive Bandages", quantity: 40 },
       { name: "Antiseptic Wipes", quantity: 20 },
@@ -67,7 +67,7 @@ const kits: Kit[] = [
     id: "large",
     title: "Large Kit",
     size: "Large",
-    image: "/assets/static/Scissors.png",
+    image: "/assets/static/ScissorsAndTweezers.jpg",
     contents: [
       { name: "Adhesive Bandages", quantity: 60 },
       { name: "Antiseptic Wipes", quantity: 30 },

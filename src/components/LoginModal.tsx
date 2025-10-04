@@ -28,8 +28,9 @@ export default function LoginModal() {
         }
         await signUp(email, password);
       }
-    } catch (err: any) {
-      setError(err.message || "An error occurred");
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : "An error occurred";
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -40,8 +41,9 @@ export default function LoginModal() {
     setError("");
     try {
       await signInWithGoogle();
-    } catch (err: any) {
-      setError(err.message || "Google authentication failed");
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : "Google authentication failed";
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }

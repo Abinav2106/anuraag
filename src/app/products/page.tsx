@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { ShoppingCart } from "lucide-react";
 import { ProductDetail } from "@/components/product-detail";
@@ -16,6 +16,21 @@ const fadeInUp = {
   transition: { duration: 0.6 }
 };
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 }
+};
+
 // Sector to product mapping
 const sectorProductMapping = {
   healthcare: ["Sterile Gauze", "Antiseptic Wipes", "Plastic First Aid Box"],
@@ -23,9 +38,10 @@ const sectorProductMapping = {
   corporate: ["Transparent First Aid Box", "Pain Relievers", "Antibiotic Ointment"]
 };
 
-export default function ProductsPage() {
+function ProductsContent() {
   const searchParams = useSearchParams();
   const sector = searchParams.get('sector');
+  const search = searchParams.get('search');
   const [activeCategory, setActiveCategory] = useState("all");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedSizes, setSelectedSizes] = useState<{ [key: string]: string }>({});
@@ -49,7 +65,7 @@ export default function ProductsPage() {
     return getProductsByCategory(activeCategory);
   };
 
-  const getSelectedSize = (productName: string, sizes: string[]) => {
+  const getSelectedSize = (productName: string, sizes: readonly string[]) => {
     return selectedSizes[productName] || sizes[0];
   };
 
@@ -219,6 +235,7 @@ export default function ProductsPage() {
                         onClick={(e) => {
                           e.stopPropagation();
                           addItem({
+                            id: `${product.name}-${getSelectedSize(product.name, product.sizes)}`,
                             name: product.name,
                             description: product.description,
                             price: product.price,
@@ -260,5 +277,18 @@ export default function ProductsPage() {
         product={selectedProduct || { name: "", description: "", price: 0, image: "", category: "", sizes: [] }}
       />
     </div>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+        <p className="text-stone-600">Loading products...</p>
+      </div>
+    </div>}>
+      <ProductsContent />
+    </Suspense>
   );
 }

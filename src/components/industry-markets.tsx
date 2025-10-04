@@ -5,7 +5,6 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
@@ -138,7 +137,7 @@ export function IndustryMarkets() {
                       </div>
                       <div className="text-sm opacity-90">Market Share</div>
                     </div>
-                    <h3 className="text-xl font-serif font-bold mb-1">
+                    <h3 className="text-xl font-serif font-bold mb-1 text-white">
                       {market.title}
                     </h3>
                     <p className="text-sm opacity-90">

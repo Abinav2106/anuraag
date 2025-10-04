@@ -14,7 +14,7 @@ interface ProductDetailProps {
     description: string;
     price: number;
     image: string;
-    sizes: string[];
+    sizes: readonly string[];
   };
 }
 
@@ -113,11 +113,11 @@ export function ProductDetail({ isOpen, onClose, product }: ProductDetailProps) 
 
             {/* Right Side - Product Info */}
             <div className="space-y-6">
-              {/* Price and Title */}
+              {/* Title, Description and Price */}
               <div>
-                <div className="text-lg font-medium text-stone-800 mb-2">₹{product.price}</div>
                 <h1 className="text-3xl font-medium text-stone-900 mb-4">{product.name}</h1>
-                <p className="text-stone-600 leading-relaxed">{product.description}</p>
+                <p className="text-stone-600 leading-relaxed mb-4">{product.description}</p>
+                <div className="text-lg font-medium text-stone-800">₹{product.price}</div>
               </div>
 
               {/* Size Selection */}

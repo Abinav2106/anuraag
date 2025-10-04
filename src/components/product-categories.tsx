@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Heart, ShoppingCart } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import { ProductDetail } from "@/components/product-detail";
 import { useCart } from "@/context/cart-context";
 import { Button } from "@/components/ui/button";
@@ -16,7 +16,7 @@ export function ProductCategories() {
   const [selectedSizes, setSelectedSizes] = useState<{ [key: string]: string }>({});
   const { addItem } = useCart();
 
-  const getSelectedSize = (productName: string, sizes: string[]) => {
+  const getSelectedSize = (productName: string, sizes: readonly string[]) => {
     return selectedSizes[productName] || sizes[0];
   };
 
@@ -147,6 +147,7 @@ export function ProductCategories() {
                       onClick={(e) => {
                         e.stopPropagation();
                         addItem({
+                          id: `${product.name}-${getSelectedSize(product.name, product.sizes)}`,
                           name: product.name,
                           description: product.description,
                           price: product.price,

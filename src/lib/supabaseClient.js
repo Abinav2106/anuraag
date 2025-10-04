@@ -9,7 +9,7 @@ export const supabase = isDemoMode
   ? { // Mock Supabase client for demo mode
       auth: {
         getSession: async () => ({ data: { session: null } }),
-        onAuthStateChange: (callback) => {
+        onAuthStateChange: () => {
           // Simulate no auth changes in demo mode
           return { data: { subscription: { unsubscribe: () => {} } } };
         },

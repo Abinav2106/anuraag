@@ -181,7 +181,7 @@ export default function TestimonialsPage() {
                 </div>
                 
                 <p className="text-gray-700 italic leading-relaxed">
-                  "{testimonial.feedback}"
+                  &ldquo;{testimonial.feedback}&rdquo;
                 </p>
               </motion.div>
             ))}
