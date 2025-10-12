@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { AnimatedText } from "@/components/animated-text";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -28,9 +29,10 @@ export default function AboutPage() {
         <div className="max-w-5xl mx-auto space-y-8">
           {/* Page Heading */}
           <motion.div className="text-center" variants={fadeInUp}>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-gray-900 tracking-tight">
-              About Us
-            </h1>
+            <AnimatedText 
+              text="About Us"
+              className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-gray-900 tracking-tight"
+            />
             
             {/* Gold Divider */}
             <div className="w-24 h-[2px] bg-gradient-to-r from-yellow-500 to-amber-500 mx-auto mt-6"></div>

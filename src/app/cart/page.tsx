@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Minus, Plus, Trash2, ShoppingBag, ArrowLeft } from "lucide-react";
+import { Minus, Plus, Trash2, ShoppingBag, ArrowLeft, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/cart-context";
+import { useAuth } from "@/lib/AuthContext";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -28,7 +29,8 @@ const itemVariants = {
 };
 
 export default function CartPage() {
-  const { state, updateQuantity, removeItem, clearCart } = useCart();
+  const { state, updateQuantity, removeItem, clearCartCompletely } = useCart();
+  const { user } = useAuth();
 
   // Calculate tax (8% for demo)
   const taxRate = 0.08;
@@ -53,6 +55,38 @@ export default function CartPage() {
             Review your items and proceed to checkout
           </p>
         </motion.div>
+
+        {/* Sign-in Prompt */}
+        {!user && state.items.length > 0 && (
+          <motion.div
+            variants={fadeInUp}
+            initial="initial"
+            animate="animate"
+            className="mb-8"
+          >
+            <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+              <div className="flex items-center gap-3">
+                <User className="w-5 h-5 text-amber-600" />
+                <div className="flex-1">
+                  <p className="text-sm text-amber-800 font-medium">
+                    Sign in to save your cart
+                  </p>
+                  <p className="text-xs text-amber-700">
+                    Your items will be saved when you sign in and restored when you return
+                  </p>
+                </div>
+                <Link href="/login">
+                  <Button 
+                    size="sm"
+                    className="bg-amber-600 hover:bg-amber-700 text-white"
+                  >
+                    Sign In
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        )}
 
         {state.items.length === 0 ? (
           /* Empty Cart State */
@@ -272,7 +306,7 @@ export default function CartPage() {
                   <Button 
                     variant="outline" 
                     className="w-full hover:bg-stone-50 transition-colors" 
-                    onClick={clearCart}
+                    onClick={clearCartCompletely}
                     style={{ 
                       borderColor: '#C89B3C',
                       color: '#C89B3C'

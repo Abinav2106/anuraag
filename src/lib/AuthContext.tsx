@@ -73,6 +73,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   async function logout() {
     try {
       await signOut(auth);
+      // Note: We don't clear cart data from localStorage here
+      // The cart will be cleared from the current session but preserved for when user signs back in
     } catch (error) {
       console.error('Logout error:', error);
       throw error;

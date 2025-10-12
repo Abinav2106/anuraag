@@ -8,6 +8,7 @@ import { useCart } from "@/context/cart-context";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { categories, getProductsByCategory, type Product } from "@/data/products";
+import { useProducts } from "@/context/products-context";
 
 export function ProductCategories() {
   const [activeCategory, setActiveCategory] = useState("all");
@@ -15,6 +16,7 @@ export function ProductCategories() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedSizes, setSelectedSizes] = useState<{ [key: string]: string }>({});
   const { addItem } = useCart();
+  const { products } = useProducts();
 
   const getSelectedSize = (productName: string, sizes: readonly string[]) => {
     return selectedSizes[productName] || sizes[0];
@@ -70,7 +72,10 @@ export function ProductCategories() {
           transition={{ duration: 0.3 }}
         >
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {getProductsByCategory(activeCategory).slice(0, showAll ? undefined : 6).map((product, index) => (
+            {products.filter(product => {
+              if (activeCategory === "all") return true;
+              return product.category === activeCategory;
+            }).slice(0, showAll ? undefined : 6).map((product, index) => (
               <motion.div
                 key={product.name}
                 initial={{ opacity: 0, y: 20 }}
@@ -79,9 +84,19 @@ export function ProductCategories() {
                 className="group cursor-pointer"
                 onClick={() => setSelectedProduct(product)}
               >
-                <div className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
+                <div className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 h-full flex flex-col">
                   {/* Product Image Area */}
                   <div className="aspect-square bg-stone-100 relative overflow-hidden">
+                    {/* Stock Status Indicator */}
+                    {product.inStock ? (
+                      <p className="absolute top-3 left-3 text-sm text-green-700 font-medium bg-green-100 inline-block px-3 py-1 rounded-full shadow-sm">
+                        In Stock
+                      </p>
+                    ) : (
+                      <p className="absolute top-3 left-3 text-sm text-red-700 font-medium bg-red-100 inline-block px-3 py-1 rounded-full shadow-sm">
+                        Out of Stock
+                      </p>
+                    )}
                     <Image
                       src={product.image}
                       alt={product.name}
@@ -92,7 +107,7 @@ export function ProductCategories() {
                   </div>
                   
                   {/* Product Info */}
-                  <div className="p-6">
+                  <div className="p-6 flex flex-col flex-grow">
                     <h3 className="text-lg font-medium text-stone-800 mb-2 group-hover:text-stone-900 transition-colors">
                       {product.name}
                     </h3>
@@ -100,8 +115,8 @@ export function ProductCategories() {
                       {product.description}
                     </p>
                     
-                    {/* Size Selection */}
-                    <div className="mb-4">
+                    {/* Size Selection - Fixed height container */}
+                    <div className="mb-4 min-h-[60px]">
                       <label className="text-xs font-medium text-stone-600 mb-2 block">
                         Size:
                       </label>
@@ -113,7 +128,7 @@ export function ProductCategories() {
                               e.stopPropagation();
                               setSelectedSize(product.name, size);
                             }}
-                            className={`px-3 py-1 text-xs font-medium rounded-md border transition-all ${
+                            className={`px-3 py-1 text-xs font-medium rounded-md border transition-all whitespace-nowrap ${
                               getSelectedSize(product.name, product.sizes) === size
                                 ? 'border-stone-700 bg-stone-700 text-white'
                                 : 'border-stone-300 bg-white text-stone-600 hover:border-stone-400'
@@ -124,6 +139,9 @@ export function ProductCategories() {
                         ))}
                       </div>
                     </div>
+
+                    {/* Spacer to push buttons to bottom */}
+                    <div className="flex-grow"></div>
 
                     <div className="flex items-center justify-between mb-3">
                       <span className="text-lg font-medium text-stone-800">
@@ -156,11 +174,16 @@ export function ProductCategories() {
                           image: product.image
                         });
                       }}
-                      className="w-full bg-primary text-white hover:bg-primary/90 transition-colors"
+                      disabled={!product.inStock}
+                      className={`w-full transition-colors ${
+                        product.inStock 
+                          ? "bg-primary text-white hover:bg-primary/90" 
+                          : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                      }`}
                       size="sm"
                     >
                       <ShoppingCart className="w-4 h-4 mr-2" />
-                      Add to Cart
+                      {product.inStock ? "Add to Cart" : "Out of Stock"}
                     </Button>
                   </div>
                 </div>
@@ -170,7 +193,10 @@ export function ProductCategories() {
 
           {/* Show More / Show Less Button */}
           {(() => {
-            const totalProducts = getProductsByCategory(activeCategory).length;
+            const totalProducts = products.filter(product => {
+              if (activeCategory === "all") return true;
+              return product.category === activeCategory;
+            }).length;
             
             return totalProducts > 6 && (
               <div className="text-center mt-12">

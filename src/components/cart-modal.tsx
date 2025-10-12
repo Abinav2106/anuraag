@@ -1,9 +1,10 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
+import { X, Minus, Plus, ShoppingBag, Trash2, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/cart-context";
+import { useAuth } from "@/lib/AuthContext";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -13,7 +14,8 @@ interface CartModalProps {
 }
 
 export function CartModal({ isOpen, onClose }: CartModalProps) {
-  const { state, updateQuantity, removeItem, clearCart } = useCart();
+  const { state, updateQuantity, removeItem, clearCartCompletely } = useCart();
+  const { user } = useAuth();
 
   return (
     <AnimatePresence>
@@ -57,6 +59,31 @@ export function CartModal({ isOpen, onClose }: CartModalProps) {
                 <X className="w-5 h-5" />
               </Button>
             </div>
+
+            {/* Sign-in Prompt */}
+            {!user && state.items.length > 0 && (
+              <div className="px-6 py-3 bg-amber-50 border-b border-amber-200">
+                <div className="flex items-center gap-3">
+                  <User className="w-4 h-4 text-amber-600" />
+                  <div className="flex-1">
+                    <p className="text-sm text-amber-800 font-medium">
+                      Sign in to save your cart
+                    </p>
+                    <p className="text-xs text-amber-700">
+                      Your items will be saved when you sign in
+                    </p>
+                  </div>
+                  <Link href="/login" onClick={onClose}>
+                    <Button 
+                      size="sm"
+                      className="text-xs px-3 py-1 bg-amber-600 hover:bg-amber-700 text-white"
+                    >
+                      Sign In
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            )}
 
             {/* Cart Content */}
             <div className="flex-1 overflow-y-auto p-6">
@@ -195,7 +222,7 @@ export function CartModal({ isOpen, onClose }: CartModalProps) {
                   <Button 
                     variant="outline" 
                     className="w-full hover:bg-stone-50 transition-colors" 
-                    onClick={clearCart}
+                    onClick={clearCartCompletely}
                     style={{ 
                       borderColor: '#C89B3C',
                       color: '#C89B3C'

@@ -5,6 +5,7 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { CartProvider } from "@/context/cart-context";
+import { ProductsProvider } from "@/context/products-context";
 import { AuthProvider } from "@/lib/AuthContext";
 
 const inter = Inter({
@@ -74,12 +75,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} ${playfair.variable} antialiased min-h-dvh flex flex-col`}>
         <AuthProvider>
-          <CartProvider>
-            <SiteHeader />
-            <main className="flex-1">{children}</main>
-            <SiteFooter />
-            <Toaster richColors position="top-right" />
-          </CartProvider>
+          <ProductsProvider>
+            <CartProvider>
+              <SiteHeader />
+              <main className="flex-1">{children}</main>
+              <SiteFooter />
+              <Toaster richColors position="top-right" />
+            </CartProvider>
+          </ProductsProvider>
         </AuthProvider>
       </body>
     </html>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MapPin, Phone, Mail, Award, Shield, CheckCircle } from "lucide-react";
+import { MapPin, Phone, Mail, Award, Shield, CheckCircle, Settings } from "lucide-react";
 
 export function SiteFooter() {
   return (
@@ -94,10 +94,19 @@ export function SiteFooter() {
           </div>
 
           {/* Copyright */}
-          <p className="text-sm text-muted-foreground">
-            © 
-            {new Date().getFullYear()} Anuraag Medicals. All rights reserved.
-          </p>
+          <div className="flex items-center gap-4">
+            <p className="text-sm text-muted-foreground">
+              © 
+              {new Date().getFullYear()} Anuraag Medicals. All rights reserved.
+            </p>
+            <Link
+              href="/admin"
+              className="flex items-center gap-1 text-xs text-muted-foreground hover:text-primary transition-colors"
+            >
+              <Settings className="w-3 h-3" />
+              Admin
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

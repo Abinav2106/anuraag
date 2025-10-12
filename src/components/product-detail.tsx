@@ -15,6 +15,7 @@ interface ProductDetailProps {
     price: number;
     image: string;
     sizes: readonly string[];
+    inStock: boolean;
   };
 }
 
@@ -85,6 +86,16 @@ export function ProductDetail({ isOpen, onClose, product }: ProductDetailProps) 
             <div className="space-y-4">
               {/* Main Image */}
               <div className="aspect-square bg-stone-100 rounded-lg relative overflow-hidden">
+                {/* Stock Status Indicator */}
+                {product.inStock ? (
+                  <p className="absolute top-4 left-4 text-sm text-green-700 font-medium bg-green-100 inline-block px-3 py-1 rounded-full shadow-sm z-10">
+                    In Stock
+                  </p>
+                ) : (
+                  <p className="absolute top-4 left-4 text-sm text-red-700 font-medium bg-red-100 inline-block px-3 py-1 rounded-full shadow-sm z-10">
+                    Out of Stock
+                  </p>
+                )}
                 {product.image && (
                   <Image
                     src={product.image}
@@ -94,10 +105,6 @@ export function ProductDetail({ isOpen, onClose, product }: ProductDetailProps) 
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 )}
-                {/* Heart Icon */}
-                <button className="absolute top-4 right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-shadow">
-                  <span className="text-stone-400 hover:text-red-400 transition-colors text-lg">♡</span>
-                </button>
               </div>
 
               {/* Thumbnail Images */}

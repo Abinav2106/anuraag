@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { AnimatedText } from "@/components/animated-text";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -27,12 +28,10 @@ export default function ContactPage() {
         animate="animate"
         variants={fadeInUp}
       >
-        <motion.h1 
+        <AnimatedText 
+          text="Reach Us"
           className="text-4xl font-bold text-center text-gray-900"
-          variants={fadeInUp}
-        >
-          Reach Us
-        </motion.h1>
+        />
         
         <motion.div 
           className="w-20 h-[2px] bg-gradient-to-r from-yellow-500 to-amber-500 mx-auto mb-4"

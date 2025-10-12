@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useAuth } from "@/lib/AuthContext";
 import { motion } from "framer-motion";
+import { AnimatedText } from "@/components/animated-text";
 
 export default function LoginModal() {
   const { signIn, signUp, signInWithGoogle } = useAuth();
@@ -60,9 +61,10 @@ export default function LoginModal() {
           exit={{ opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.2 }}
         >
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6 text-center">
-            {isLogin ? "Welcome Back" : "Create Account"}
-          </h2>
+          <AnimatedText 
+            text={isLogin ? "Welcome Back" : "Create Account"}
+            className="text-2xl font-semibold text-gray-900 mb-6 text-center"
+          />
 
           {/* Toggle Buttons */}
           <div className="flex bg-gray-100 rounded-full p-1 mb-6">

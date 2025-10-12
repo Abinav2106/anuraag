@@ -9,6 +9,7 @@ import { useCart } from "@/context/cart-context";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { categories, getProductsByCategory, getAllProducts, type Product } from "@/data/products";
+import { useProducts } from "@/context/products-context";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -46,6 +47,7 @@ function ProductsContent() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedSizes, setSelectedSizes] = useState<{ [key: string]: string }>({});
   const { addItem } = useCart();
+  const { products, loading } = useProducts();
 
   // Update category based on sector parameter
   useEffect(() => {
@@ -57,12 +59,14 @@ function ProductsContent() {
   const getFilteredProducts = () => {
     if (sector && sectorProductMapping[sector as keyof typeof sectorProductMapping]) {
       const recommendedProducts = sectorProductMapping[sector as keyof typeof sectorProductMapping];
-      const allProducts = getAllProducts();
-      return allProducts.filter(product => 
+      return products.filter(product => 
         recommendedProducts.includes(product.name)
       );
     }
-    return getProductsByCategory(activeCategory);
+    return products.filter(product => {
+      if (activeCategory === "all") return true;
+      return product.category === activeCategory;
+    });
   };
 
   const getSelectedSize = (productName: string, sizes: readonly string[]) => {
@@ -170,6 +174,16 @@ function ProductsContent() {
                   <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-stone-100">
                     {/* Product Image Area */}
                     <div className="aspect-square bg-stone-50 relative overflow-hidden">
+                      {/* Stock Status Indicator */}
+                      {product.inStock ? (
+                        <p className="absolute top-3 left-3 text-sm text-green-700 font-medium bg-green-100 inline-block px-3 py-1 rounded-full shadow-sm">
+                          In Stock
+                        </p>
+                      ) : (
+                        <p className="absolute top-3 left-3 text-sm text-red-700 font-medium bg-red-100 inline-block px-3 py-1 rounded-full shadow-sm">
+                          Out of Stock
+                        </p>
+                      )}
                       <Image
                         src={product.image}
                         alt={product.name}
@@ -244,11 +258,16 @@ function ProductsContent() {
                             image: product.image
                           });
                         }}
-                        className="w-full bg-primary text-white hover:bg-primary/90 transition-colors shadow-sm hover:shadow-md"
+                        disabled={!product.inStock}
+                        className={`w-full transition-colors shadow-sm hover:shadow-md ${
+                          product.inStock 
+                            ? "bg-primary text-white hover:bg-primary/90" 
+                            : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                        }`}
                         size="sm"
                       >
                         <ShoppingCart className="w-4 h-4 mr-2" />
-                        Add to Cart
+                        {product.inStock ? "Add to Cart" : "Out of Stock"}
                       </Button>
                     </div>
                   </div>

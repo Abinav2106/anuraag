@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
+import { AnimatedText } from "@/components/animated-text";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -94,9 +95,10 @@ export default function TestimonialsPage() {
       >
         {/* Page Header */}
         <motion.div className="text-center mb-16" variants={fadeInUp}>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-gray-900 mb-6">
-            Ratings & Reviews
-          </h1>
+          <AnimatedText 
+            text="Ratings & Reviews"
+            className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-gray-900 mb-6"
+          />
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             See what our clients across India say about Anuraag Medicals.
           </p>

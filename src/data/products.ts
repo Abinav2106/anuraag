@@ -5,6 +5,7 @@ export interface Product {
   image: string;
   category: string;
   sizes: readonly string[];
+  inStock: boolean;
 }
 
 export const products = {
@@ -15,7 +16,8 @@ export const products = {
       price: 299, 
       image: "/assets/static/PlasticFirstAidBox.jpg",
       category: "kits",
-      sizes: ["S", "M", "L"]
+      sizes: ["S", "M", "L"],
+      inStock: true
     },
     { 
       name: "Vinyl First Aid Kit", 
@@ -23,7 +25,8 @@ export const products = {
       price: 399, 
       image: "/assets/static/VinylFirstAidKit.jpg",
       category: "kits",
-      sizes: ["S", "M", "L"]
+      sizes: ["S", "M", "L"],
+      inStock: true
     },
     { 
       name: "Transparent First Aid Box", 
@@ -31,7 +34,8 @@ export const products = {
       price: 349, 
       image: "/assets/static/TransparentBox.jpg",
       category: "kits",
-      sizes: ["S", "M", "L"]
+      sizes: ["S", "M", "L"],
+      inStock: true
     },
     { 
       name: "Family First Aid Kit", 
@@ -39,7 +43,8 @@ export const products = {
       price: 599, 
       image: "/assets/static/FamilyKit.jpg",
       category: "kits",
-      sizes: ["S", "M", "L"]
+      sizes: ["S", "M", "L"],
+      inStock: true
     },
   ],
   consumables: [
@@ -49,7 +54,8 @@ export const products = {
       price: 149, 
       image: "/assets/static/SterileGauze.jpg",
       category: "consumables",
-      sizes: ["50ml", "100ml", "250ml"]
+      sizes: ["50ml", "100ml", "250ml"],
+      inStock: true
     },
     { 
       name: "Adhesive Bandages", 
@@ -57,7 +63,8 @@ export const products = {
       price: 89, 
       image: "/assets/static/ab.png",
       category: "consumables",
-      sizes: ["Small (1.9×7.2 cm)", "Medium (2.5×7.5 cm)", "Large (3.8×7.5 cm)"]
+      sizes: ["Small (1.9×7.2 cm)", "Medium (2.5×7.5 cm)", "Large (3.8×7.5 cm)"],
+      inStock: false
     },
     { 
       name: "Antiseptic Wipes", 
@@ -65,7 +72,8 @@ export const products = {
       price: 129, 
       image: "/assets/static/AntisepticWipes.jpg",
       category: "consumables",
-      sizes: ["10 Wipes", "25 Wipes", "50 Wipes"]
+      sizes: ["10 Wipes", "25 Wipes", "50 Wipes"],
+      inStock: true
     },
     { 
       name: "Disposable Gloves", 
@@ -73,7 +81,8 @@ export const products = {
       price: 199, 
       image: "/assets/static/DisposableGloves.jpg",
       category: "consumables",
-      sizes: ["Small (7 cm)", "Medium (8 cm)", "Large (9 cm)", "Extra-Large (10 cm)"]
+      sizes: ["Small (7 cm)", "Medium (8 cm)", "Large (9 cm)", "Extra-Large (10 cm)"],
+      inStock: true
     },
     { 
       name: "Adhesive Tape", 
@@ -81,7 +90,8 @@ export const products = {
       price: 79, 
       image: "/assets/static/AdhesiveTape.jpg",
       category: "consumables",
-      sizes: ["1 cm × 5 m", "2.5 cm × 5 m", "5 cm × 5 m"]
+      sizes: ["1 cm × 5 m", "2.5 cm × 5 m", "5 cm × 5 m"],
+      inStock: true
     },
     { 
       name: "Triangular Bandages", 
@@ -89,7 +99,8 @@ export const products = {
       price: 159, 
       image: "/assets/static/TriangularBandages.jpg",
       category: "consumables",
-      sizes: ["Adult (96×96×136 cm)", "Child (85×85×120 cm)", "Compact (60×60×85 cm)"]
+      sizes: ["Adult (96×96×136 cm)", "Child (85×85×120 cm)", "Compact (60×60×85 cm)"],
+      inStock: true
     },
   ],
   specialty: [
@@ -99,7 +110,8 @@ export const products = {
       price: 249, 
       image: "/assets/static/ScissorsAndTweezers.jpg",
       category: "specialty",
-      sizes: ["Small (10 cm)", "Standard (12.5 cm)", "Large (15 cm)"]
+      sizes: ["Small (10 cm)", "Standard (12.5 cm)", "Large (15 cm)"],
+      inStock: true
     },
     { 
       name: "Antibiotic Ointment", 
@@ -107,7 +119,8 @@ export const products = {
       price: 189, 
       image: "/assets/static/AntibioticOintment.jpg",
       category: "specialty",
-      sizes: ["5 g", "10 g", "15 g"]
+      sizes: ["5 g", "10 g", "15 g"],
+      inStock: false
     },
     { 
       name: "Pain Relievers", 
@@ -115,7 +128,8 @@ export const products = {
       price: 99, 
       image: "/assets/static/PainRelievers.jpg",
       category: "specialty",
-      sizes: ["10 Tablets", "20 Tablets", "50 Tablets"]
+      sizes: ["10 Tablets", "20 Tablets", "50 Tablets"],
+      inStock: true
     },
   ],
 } as const;
