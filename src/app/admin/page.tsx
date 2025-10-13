@@ -1,18 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Lock, Eye, EyeOff, Plus, Trash2, Package, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useProducts } from "@/context/products-context";
-import { getAllProducts, type Product } from "@/data/products";
-
-interface AdminProduct extends Product {
-  id: string;
-  inStock: boolean;
-}
+import Image from "next/image";
 
 const ADMIN_PASSWORD = "password";
 
@@ -29,7 +24,7 @@ export default function AdminPage() {
     description: "",
   });
 
-  const { products, updateProductStock, addProduct, removeProduct, loading } = useProducts();
+  const { products, updateProductStock, addProduct, removeProduct } = useProducts();
 
   // Check authentication on component mount
   useEffect(() => {
@@ -337,11 +332,13 @@ export default function AdminPage() {
                   >
                     <td className="py-4 px-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-gray-100 rounded-lg overflow-hidden">
-                          <img
+                        <div className="w-10 h-10 bg-gray-100 rounded-lg overflow-hidden relative">
+                          <Image
                             src={product.image}
                             alt={product.name}
-                            className="w-full h-full object-cover"
+                            fill
+                            className="object-cover"
+                            sizes="40px"
                           />
                         </div>
                         <div>

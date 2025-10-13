@@ -8,7 +8,7 @@ import { ProductDetail } from "@/components/product-detail";
 import { useCart } from "@/context/cart-context";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { categories, getProductsByCategory, getAllProducts, type Product } from "@/data/products";
+import { categories, type Product } from "@/data/products";
 import { useProducts } from "@/context/products-context";
 
 const fadeInUp = {
@@ -17,20 +17,6 @@ const fadeInUp = {
   transition: { duration: 0.6 }
 };
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 }
-};
 
 // Sector to product mapping
 const sectorProductMapping = {
@@ -42,12 +28,11 @@ const sectorProductMapping = {
 function ProductsContent() {
   const searchParams = useSearchParams();
   const sector = searchParams.get('sector');
-  const search = searchParams.get('search');
   const [activeCategory, setActiveCategory] = useState("all");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedSizes, setSelectedSizes] = useState<{ [key: string]: string }>({});
   const { addItem } = useCart();
-  const { products, loading } = useProducts();
+  const { products } = useProducts();
 
   // Update category based on sector parameter
   useEffect(() => {
@@ -293,7 +278,7 @@ function ProductsContent() {
       <ProductDetail
         isOpen={!!selectedProduct}
         onClose={() => setSelectedProduct(null)}
-        product={selectedProduct || { name: "", description: "", price: 0, image: "", category: "", sizes: [] }}
+        product={selectedProduct || { name: "", description: "", price: 0, image: "", sizes: [], inStock: false }}
       />
     </div>
   );

@@ -7,7 +7,7 @@ import { ProductDetail } from "@/components/product-detail";
 import { useCart } from "@/context/cart-context";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { categories, getProductsByCategory, type Product } from "@/data/products";
+import { categories, type Product } from "@/data/products";
 import { useProducts } from "@/context/products-context";
 
 export function ProductCategories() {
