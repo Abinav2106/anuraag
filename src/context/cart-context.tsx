@@ -140,15 +140,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
         dispatch({ type: "LOAD_CART", payload: savedCart });
       }
     } else {
-      // Save current cart before clearing session when user signs out
-      if (state.items.length > 0) {
-        // We need to save the cart for the previous user before clearing
-        // This is handled by the save effect below
-      }
       // Clear cart from current session when user signs out
       // but keep the data in localStorage for when they sign back in
       dispatch({ type: "CLEAR_CART" });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   // Save cart to storage whenever cart state changes
@@ -156,6 +152,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     if (user && state.items.length > 0) {
       saveCartToStorage(state);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state, user]);
 
   const addItem = (item: Omit<CartItem, "quantity">) => {

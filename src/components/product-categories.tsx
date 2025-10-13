@@ -217,7 +217,7 @@ export function ProductCategories() {
         <ProductDetail
           isOpen={!!selectedProduct}
           onClose={() => setSelectedProduct(null)}
-          product={selectedProduct || { name: "", description: "", price: 0, image: "", category: "", sizes: [] }}
+          product={selectedProduct || { name: "", description: "", price: 0, image: "", sizes: [], inStock: false }}
         />
       </div>
     </section>
