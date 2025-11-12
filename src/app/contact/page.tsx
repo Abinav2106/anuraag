@@ -23,32 +23,32 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-stone-50 via-white to-stone-100">
       <motion.section 
-        className="max-w-4xl mx-auto px-6 py-12 space-y-6"
+        className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-4 sm:space-y-6"
         initial="initial"
         animate="animate"
         variants={fadeInUp}
       >
         <AnimatedText 
           text="Reach Us"
-          className="text-4xl font-bold text-center text-gray-900"
+          className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-gray-900"
         />
         
         <motion.div 
-          className="w-20 h-[2px] bg-gradient-to-r from-yellow-500 to-amber-500 mx-auto mb-4"
+          className="w-16 sm:w-20 h-[2px] bg-gradient-to-r from-yellow-500 to-amber-500 mx-auto mb-3 sm:mb-4"
           variants={fadeInUp}
         />
 
         <motion.div 
-          className="bg-white/60 backdrop-blur-md border border-white/20 shadow-lg rounded-xl p-6 space-y-3"
+          className="bg-white/60 backdrop-blur-md border border-white/20 shadow-lg rounded-xl p-4 sm:p-5 md:p-6 space-y-2 sm:space-y-3"
           variants={fadeInUp}
         >
-          <p className="text-gray-800">
+          <p className="text-sm sm:text-base text-gray-800">
             Plot No.13 – A, 13th Street, Karthikeyapuram, Chennai – 600091, Tamil Nadu, India
           </p>
-          <p className="text-gray-800">Owner: V. V. S. Mani</p>
+          <p className="text-sm sm:text-base text-gray-800">Owner: V. V. S. Mani</p>
           <a 
             href="tel:08047764026" 
-            className="text-gray-900 font-semibold hover:text-amber-600 transition-colors"
+            className="text-sm sm:text-base text-gray-900 font-semibold hover:text-amber-600 transition-colors"
           >
             Call 08047764026
           </a>
@@ -65,11 +65,11 @@ export default function ContactPage() {
             <iframe
               src={gmapEmbedUrl}
               width="100%"
-              height="380"
+              height="300"
               style={{ border: 0, pointerEvents: 'none' }}
               allowFullScreen
               loading="lazy"
-              className="w-full h-[380px] rounded-xl"
+              className="w-full h-[250px] sm:h-[300px] md:h-[380px] rounded-xl"
               title="Anuraag Medicals Exact Location"
             ></iframe>
           </a>

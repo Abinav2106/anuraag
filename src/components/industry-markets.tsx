@@ -83,19 +83,19 @@ export function IndustryMarkets() {
   };
 
   return (
-    <section ref={ref} className="py-16 bg-background">
-      <div className="container mx-auto px-6">
+    <section ref={ref} className="py-12 sm:py-16 bg-background">
+      <div className="container mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-8 sm:mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4 text-foreground">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold mb-3 sm:mb-4 text-foreground px-4">
             Trusted Across <span className="emboss text-primary">Industries</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
             From critical healthcare environments to educational institutions and corporate workplaces, 
             Anuraag delivers tailored first aid solutions for every industry.
           </p>
@@ -106,7 +106,7 @@ export function IndustryMarkets() {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
         >
           {markets.map((market) => (
             <motion.div
@@ -116,7 +116,7 @@ export function IndustryMarkets() {
               whileHover={{ y: -8, transition: { duration: 0.2 } }}
             >
               <Card className="group overflow-hidden h-full cursor-pointer transition-all duration-300 hover:shadow-xl">
-                <div className="relative h-64 overflow-hidden">
+                <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
                   {/* Background Image */}
                   <Image
                     src={market.backgroundImage}
@@ -130,24 +130,24 @@ export function IndustryMarkets() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
                   
                   {/* Content Overlay */}
-                  <div className="absolute inset-0 p-6 flex flex-col justify-end text-white">
+                  <div className="absolute inset-0 p-4 sm:p-5 md:p-6 flex flex-col justify-end text-white">
                     <div className="mb-2">
-                      <div className="text-3xl font-serif font-bold text-primary mb-1">
+                      <div className="text-2xl sm:text-3xl font-serif font-bold text-primary mb-1">
                         {market.percentage}
                       </div>
-                      <div className="text-sm opacity-90">Market Share</div>
+                      <div className="text-xs sm:text-sm opacity-90">Market Share</div>
                     </div>
-                    <h3 className="text-xl font-serif font-bold mb-1 text-white">
+                    <h3 className="text-lg sm:text-xl font-serif font-bold mb-1 text-white">
                       {market.title}
                     </h3>
-                    <p className="text-sm opacity-90">
+                    <p className="text-xs sm:text-sm opacity-90">
                       {market.subtitle}
                     </p>
                   </div>
                 </div>
                 
-                <CardContent className="p-6">
-                  <p className="text-muted-foreground mb-6 leading-relaxed">
+                <CardContent className="p-4 sm:p-5 md:p-6">
+                  <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6 leading-relaxed">
                     {market.description}
                   </p>
                   <Button 
@@ -180,20 +180,20 @@ export function IndustryMarkets() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-16 text-center"
+          className="mt-12 sm:mt-16 text-center"
         >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-4xl mx-auto px-4">
             <div className="text-center">
-              <div className="text-3xl font-serif font-bold text-primary mb-2">1000+</div>
-              <div className="text-muted-foreground">Healthcare Partners</div>
+              <div className="text-2xl sm:text-3xl font-serif font-bold text-primary mb-2">1000+</div>
+              <div className="text-sm sm:text-base text-muted-foreground">Healthcare Partners</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-serif font-bold text-primary mb-2">500+</div>
-              <div className="text-muted-foreground">Educational Institutions</div>
+              <div className="text-2xl sm:text-3xl font-serif font-bold text-primary mb-2">500+</div>
+              <div className="text-sm sm:text-base text-muted-foreground">Educational Institutions</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-serif font-bold text-primary mb-2">300+</div>
-              <div className="text-muted-foreground">Corporate Clients</div>
+              <div className="text-2xl sm:text-3xl font-serif font-bold text-primary mb-2">300+</div>
+              <div className="text-sm sm:text-base text-muted-foreground">Corporate Clients</div>
             </div>
           </div>
         </motion.div>

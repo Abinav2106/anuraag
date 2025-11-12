@@ -4,9 +4,9 @@ import { MapPin, Phone, Mail, Award, Shield, CheckCircle, Settings } from "lucid
 export function SiteFooter() {
   return (
     <footer id="contact-section" className="border-t bg-secondary/20">
-      <div className="container mx-auto px-6 py-12">
+      <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 mb-6 sm:mb-8">
           {/* About Anuraag */}
           <div className="space-y-4">
             <h3 className="text-lg font-serif font-bold text-foreground">About Anuraag</h3>
@@ -76,9 +76,9 @@ export function SiteFooter() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-border pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="border-t border-border pt-4 sm:pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Trust Badges */}
-          <div className="flex items-center gap-6 text-sm text-muted-foreground">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
               <Shield className="w-4 h-4 text-primary" />
               <span>ISO Certified</span>
@@ -94,8 +94,8 @@ export function SiteFooter() {
           </div>
 
           {/* Copyright */}
-          <div className="flex items-center gap-4">
-            <p className="text-sm text-muted-foreground">
+          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
+            <p className="text-xs sm:text-sm text-muted-foreground text-center sm:text-left">
               © 
               {new Date().getFullYear()} Anuraag Medicals. All rights reserved.
             </p>

@@ -73,7 +73,7 @@ export function SiteHeader() {
       <div className="container mx-auto flex h-14 items-center justify-between px-4 gap-4">
         <Link 
           href="/" 
-          className="font-serif text-3xl font-bold flex-shrink-0 transition-colors duration-300 ease-in-out hover:opacity-90"
+          className="font-serif text-xl sm:text-2xl md:text-3xl font-bold flex-shrink-0 transition-colors duration-300 ease-in-out hover:opacity-90"
           style={{ color: '#2C2C2C' }}
         >
           {siteConfig.name}

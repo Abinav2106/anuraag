@@ -63,19 +63,19 @@ export function QualityAssurance() {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section ref={ref} className="py-16 bg-gradient-to-r from-secondary/20 via-background to-secondary/20">
-      <div className="container mx-auto px-6">
+    <section ref={ref} className="py-12 sm:py-16 bg-gradient-to-r from-secondary/20 via-background to-secondary/20">
+      <div className="container mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-8 sm:mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4 text-foreground">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold mb-3 sm:mb-4 text-foreground px-4">
             <span className="emboss text-primary">Premium</span> Quality Standards
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
             Every Anuraag first aid kit meets the highest standards of quality, safety, and compliance.
           </p>
         </motion.div>
@@ -85,7 +85,7 @@ export function QualityAssurance() {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto"
+          className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 max-w-6xl mx-auto"
         >
           {qualityFeatures.map((feature) => (
             <motion.div
@@ -99,21 +99,23 @@ export function QualityAssurance() {
               className="flex flex-col items-center text-center group cursor-default"
             >
               {/* Gold Circle Icon */}
-              <div className="relative mb-4">
+              <div className="relative mb-3 sm:mb-4">
                 <motion.div
                   whileHover={{ scale: 1.1 }}
                   transition={{ duration: 0.2 }}
-                  className="w-20 h-20 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center text-primary-foreground shadow-lg group-hover:shadow-xl transition-shadow duration-300"
+                  className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-primary to-primary/80 rounded-full flex items-center justify-center text-primary-foreground shadow-lg group-hover:shadow-xl transition-shadow duration-300"
                 >
-                  {feature.icon}
+                  <div className="w-6 h-6 sm:w-8 sm:h-8">
+                    {feature.icon}
+                  </div>
                 </motion.div>
                 
                 {/* Subtle glow effect */}
-                <div className="absolute inset-0 w-20 h-20 bg-primary/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 w-16 h-16 sm:w-20 sm:h-20 bg-primary/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
 
               {/* Feature Title */}
-              <h3 className="text-lg font-medium text-foreground leading-tight">
+              <h3 className="text-sm sm:text-base md:text-lg font-medium text-foreground leading-tight px-2">
                 {feature.title}
               </h3>
             </motion.div>

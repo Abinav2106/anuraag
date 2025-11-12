@@ -61,20 +61,20 @@ export function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-20 max-w-4xl mx-auto px-6 text-center">
+      <div className="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 text-center">
         {/* Animated headline */}
         <motion.h1
           variants={staggerContainer}
           initial="initial"
           animate="animate"
-          className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold mb-6 leading-tight"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif font-bold mb-4 sm:mb-6 leading-tight px-2"
           style={{ color: '#2C2C2C' }}
         >
           {headlineWords.map((word, index) => (
             <motion.span
               key={index}
               variants={wordVariants}
-              className="inline-block mr-3 md:mr-4"
+              className="inline-block mr-2 sm:mr-3 md:mr-4"
             >
               {word}
             </motion.span>
@@ -87,7 +87,7 @@ export function Hero() {
           initial="initial"
           animate="animate"
           transition={{ delay: 0.8 }}
-          className="text-lg md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed"
+          className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed px-4"
           style={{ color: '#5E5E5E' }}
         >
           Since 2001 — <span className="font-medium" style={{ color: '#C89B3C' }}>Premium</span> first aid kits for Healthcare, Education & Corporate safety.
@@ -99,7 +99,7 @@ export function Hero() {
           initial="initial"
           animate="animate"
           transition={{ delay: 1.0 }}
-          className="flex flex-wrap items-center justify-center gap-6 mb-10 text-sm"
+          className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-6 mb-8 sm:mb-10 text-xs sm:text-sm px-4"
           style={{ color: '#5E5E5E' }}
         >
           <div className="flex items-center gap-2">
